@@ -1,0 +1,16 @@
+sudo: required
+language: java
+jdk: oraclejdk8
+
+services:
+  - docker
+
+script:
+  - gradle clean
+  - gradle wrapper
+  - ./gradlew build buildDocker --info
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+- docker login --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD";
+  docker push davis999/api-gateway;
