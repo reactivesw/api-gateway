@@ -21,6 +21,10 @@ items:
           env:
           - name: server_port
             value: "80"
+#          - name: zuul_routes_category_path
+#            value: /categories/**
+#          - name: zuul_routes_category_url
+#            value: http://category/
           - name: spring_cloud_config_uri
             value: http://reactivesw-config
 - kind: Service
