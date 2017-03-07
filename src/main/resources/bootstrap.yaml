@@ -1,33 +1,3 @@
-#zuul:
-#  routes:
-#    category:
-#      path: /categories/**
-#      url: http://category/
-#    cart:
-#      path: /carts/**
-#      url: http://cart/
-#    auth:
-#      path: /auth/**
-#      url: http://customer-authentication/
-#    payment:
-#      path: /payments/**
-#      url: http://payment/
-#    product:
-#      path: /products/**
-#      url: http://product/
-#    product-type:
-#      path: /product-types/**
-#      url: http://product-type/
-#    customer:
-#      path: /customers/**
-#      url: http://customer-info/
-#    inventory:
-#      path: /inventory/**
-#      url: http://inventory/
-#    order:
-#      path: /orders/**
-#      url: http://order/
-
 spring:
   application:
     name: api-gateway
