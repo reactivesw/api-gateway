@@ -1,0 +1,34 @@
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+// apply all configurations
+apply from: 'code_analyzer_test/checkstyle.gradle'
+apply from: 'code_analyzer_test/findbugs.gradle'
+apply from: 'code_analyzer_test/pmd.gradle'
+
+/*************checkstyle(use google java style)***************/
+
+checkstyle {
+    configFile = './code_analyzer_test/config/checkstyle/checkstyle.xml' as File
+}
+/*************PMD(Project Manager Design)***************/
+
+pmd {
+    ruleSetFiles = files("./code_analyzer_test/config/pmd/ruleset.xml")
+}
+
+tasks.withType(Pmd) {
+    //exclude the package you do not want to check
+    //exclude 'io/reactivesw/customerweb/Application.java'
+}
+
+/*************find bug***************/
+tasks.withType(FindBugs) {
+    //exclude the package you do not want to check
+    /* findBugs doesn't work if the filter is empty. Comment all if nothing to exclude
+    classes = classes.filter {
+        !it.path.contains('io/reactivesw/customerauthentication/grpc/')
+    }
+    */
+}
