@@ -3,9 +3,9 @@ apply plugin: 'pmd'
 apply plugin: 'findbugs'
 
 // apply all configurations
-apply from: 'code_analyzer_test/checkstyle.gradle'
-apply from: 'code_analyzer_test/findbugs.gradle'
-apply from: 'code_analyzer_test/pmd.gradle'
+apply from: './code_analyzer_test/checkstyle.gradle'
+apply from: './code_analyzer_test/findbugs.gradle'
+apply from: './code_analyzer_test/pmd.gradle'
 
 /*************checkstyle(use google java style)***************/
 
