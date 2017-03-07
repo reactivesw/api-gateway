@@ -46,5 +46,7 @@ jar {
     baseName = 'api-gateway'
     version = '0.0.1'
 }
-
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}
 apply from: 'docker_build.gradle'
