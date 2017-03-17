@@ -5,3 +5,33 @@ logging:
   level:
     com.netflix.discovery: 'OFF'
     org.springframework.cloud: 'DEBUG'
+
+zuul:
+  routes:
+    cart:
+      path: /carts/**
+      url: http://localhost:8081/
+    category:
+      path: /categories/**
+      url: http://localhost:8082/
+    auth:
+      path: /auth/**
+      url: http://localhost:8083/
+    customer:
+      path: /customers/**
+      url: http://localhost:8084/
+    inventory:
+      path: /inventory/**
+      url: http://localhost:8085/
+    order:
+      path: /orders/**
+      url: http://localhost:8086/
+    payment:
+      path: /payments/**
+      url: http://localhost:8087/
+    product:
+      path: /products/**
+      url: http://localhost:8088/
+    product-type:
+      path: /product-types/**
+      url: http://localhost:8089/
