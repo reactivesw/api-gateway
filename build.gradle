@@ -1,52 +1,34 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.1.RELEASE'
+        // specify the spring boot gradle plugin version
+        springBootVersion = '1.5.2.RELEASE'
     }
     repositories {
-        mavenCentral()
         jcenter()
+        mavenCentral()
     }
     dependencies {
+        // for spring boot
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
         //for docker build
         classpath('se.transmode.gradle:gradle-docker:1.2')
         // for unit test code coverage  -- need to find a way to put it in its file
         classpath('com.palantir:jacoco-coverage:0.4.0')
+
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'spring-boot'
-apply plugin: 'io.spring.dependency-management'
+apply from: 'build_scripts/build_setups.gradle'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+apply from: 'build_scripts/application_version.gradle'
 
-repositories {
-    jcenter()
-    mavenCentral()
-}
+apply from: 'build_scripts/application_dependencies.gradle'
 
-dependencies {
-    compile('org.springframework.cloud:spring-cloud-starter-zuul')
-    compile('org.springframework.cloud:spring-cloud-config-client')
-}
+apply from: 'build_scripts/docker_build.gradle'
 
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR5"
-    }
-}
+//for code quality assurance
+//apply from: 'build_scripts/quality_assurance/checkstyle.gradle'
+//apply from: 'build_scripts/quality_assurance/findbugs.gradle'
+//apply from: 'build_scripts/quality_assurance/pmd.gradle'
+//apply from: 'build_scripts/quality_assurance/test_coverage.gradle'
 
-apply from: 'code_analyzer_test_local/code_analyzer.gradle'
-apply from: 'code_analyzer_test_local/code_test_coverage.gradle'
-
-jar {
-    baseName = 'api-gateway'
-    version = '0.0.1'
-}
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.1'
-}
-apply from: 'docker_build.gradle'

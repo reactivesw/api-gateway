@@ -1,0 +1,35 @@
+// Declare application repositories and dependencies
+// Auto manage all spring boot dependencies
+apply plugin: 'org.springframework.boot'
+
+// For spring cloud dependencies
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR5"
+    }
+}
+
+dependencies {
+    // Spring
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.cloud:spring-cloud-starter-config")
+    compile('org.springframework.cloud:spring-cloud-starter-zuul')
+
+    // For @CreatedDate and @LastModifiedDate
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5')
+
+    // Spring data jpa
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    // Postgresql driver
+    compile('org.postgresql:postgresql:9.4.1212')
+
+
+    compile('com.google.api-client:google-api-client:1.22.0')
+    // For json web token
+    compile("io.jsonwebtoken:jjwt:0.7.0")
+
+    // Lombok
+    compile('org.projectlombok:lombok:1.16.12')
+
+    compile("io.reactivesw:commons:0.0.1")
+}
