@@ -77,7 +77,8 @@ atlassian-ide-plugin.xml
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# Ignored for gradle-compass plugin
-.sass-cache
-src/main/resources/static/css
-.gems
+# Ignored gradle
+*/gradle
+/gradle
+gradlew*
+
