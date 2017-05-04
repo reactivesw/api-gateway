@@ -35,3 +35,14 @@ zuul:
     product-type:
       path: /product-types/**
       url: http://localhost:8089/
+
+
+authentication:
+  service:
+    uri: http://localhost:8083/
+
+auth:
+  ignored:
+    hosts:
+      - localhost
+      - auth
