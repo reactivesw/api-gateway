@@ -39,6 +39,9 @@ public class AuthenticationPreFilter extends ZuulFilter {
   @Value("${authentication.service.uri:http://auth/}")
   private transient String authUri;
 
+  /**
+   * Auth filter config.
+   */
   @Autowired
   private AuthFilterConfig config;
 
@@ -60,7 +63,6 @@ public class AuthenticationPreFilter extends ZuulFilter {
    */
   @Override
   public int filterOrder() {
-    // use
     return 6;
   }
 
