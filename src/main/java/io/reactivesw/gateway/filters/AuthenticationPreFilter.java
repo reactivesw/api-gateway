@@ -24,7 +24,7 @@ public class AuthenticationPreFilter extends ZuulFilter {
 
 
   /**
-   * logger.
+   * Logger.
    */
   private static final Logger LOG = LoggerFactory.getLogger(AuthenticationPreFilter.class);
 
@@ -34,7 +34,7 @@ public class AuthenticationPreFilter extends ZuulFilter {
   private transient RestTemplate restTemplate = new RestTemplate();
 
   /**
-   * product uri.
+   * Authentication service uri.
    */
   @Value("${authentication.service.uri:http://auth/}")
   private transient String authUri;
