@@ -75,9 +75,11 @@ public class AuthenticationPreFilter extends ZuulFilter {
   public boolean shouldFilter() {
     RequestContext ctx = getCurrentContext();
     String host = ctx.getRouteHost().getHost();
-    LOG.debug("Check for host: {}.", host);
+    HttpServletRequest request = ctx.getRequest();
+    String method = request.getMethod();
+    LOG.debug("Check for host: {}, method: {}.", host, method);
     boolean shouldFilter = true;
-    if (config.getHosts().contains(host)) {
+    if (config.getHosts().contains(host) | method.equals("OPTIONS")) {
       LOG.debug("Ignore host: {}.", host);
       shouldFilter = false;
     }
