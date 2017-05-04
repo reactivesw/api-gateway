@@ -75,8 +75,10 @@ public class AuthenticationPreFilter extends ZuulFilter {
   public boolean shouldFilter() {
     RequestContext ctx = getCurrentContext();
     String host = ctx.getRouteHost().getHost();
+    LOG.debug("Check for host: {}.", host);
     boolean shouldFilter = true;
     if (config.getHosts().contains(host)) {
+      LOG.debug("Ignore host: {}.", host);
       shouldFilter = false;
     }
     return shouldFilter;
@@ -96,10 +98,12 @@ public class AuthenticationPreFilter extends ZuulFilter {
     if (customerId != null) {
       // if true, then set the customerId to header
       ctx.addZuulRequestHeader("customerId", customerId);
+      LOG.info("Exit. check auth success.");
     } else {
       // stop routing and return auth failed.
       ctx.unset();
       ctx.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+      LOG.info("Exit. check auth failed.");
     }
     return null;
   }
