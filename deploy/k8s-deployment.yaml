@@ -1,23 +1,23 @@
 kind: Deployment
-  apiVersion: extensions/v1beta1
-  metadata:
-    namespace: dev
-    name: api-gateway
-  spec:
-    replicas: 1
-    template:
-      metadata:
-        labels:
-          name: api-gateway
-      spec:
-        containers:
-        - name: api-gateway
-          image: reactivesw/api-gateway:0.0.4
-          imagePullPolicy: Always
-          ports:
-          - containerPort: 80
-          env:
-          - name: server_port
-            value: "80"
-          - name: spring_cloud_config_uri
-            value: http://reactivesw-config
+apiVersion: extensions/v1beta1
+metadata:
+  namespace: dev
+  name: api-gateway
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: api-gateway
+    spec:
+      containers:
+      - name: api-gateway
+        image: reactivesw/api-gateway:0.0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: server_port
+          value: "80"
+        - name: spring_cloud_config_uri
+          value: http://reactivesw-config
