@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 
 import static com.netflix.zuul.context.RequestContext.getCurrentContext;
@@ -97,13 +99,15 @@ public class AuthenticationPreFilter extends ZuulFilter {
     HttpServletRequest request = ctx.getRequest();
     String token = request.getHeader("authorization");
     String customerId = checkAuthentication(token);
+    Enumeration<String> headers =  request.getHeaderNames();
     if (customerId != null) {
       // if true, then set the customerId to header
       ctx.addZuulRequestHeader("customerId", customerId);
       LOG.info("Exit. check auth success.");
     } else {
       // stop routing and return auth failed.
-      ctx.unset();
+      ctx.setSendZuulResponse(false);
+      ctx.addZuulResponseHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
       ctx.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
       LOG.info("Exit. check auth failed.");
     }
